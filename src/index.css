@@ -1,0 +1,9 @@
+#pets-container {
+  display: flex;
+  gap: 15px;
+}
+
+.card-style {
+  display: flex;
+  flex-direction: column;
+}
