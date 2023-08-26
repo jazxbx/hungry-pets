@@ -1,9 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Card from "./components/Card";
 import { petsData } from "./lib";
 
 function App() {
   const [pets, setPets] = useState(petsData);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPets((prevPets) => {
+        // make a copy of state
+        const updatedPets = prevPets.map((pet) => ({
+          ...pet,
+          // update hunger and love
+          hunger: pet.hunger + 0.1,
+          love: pet.love - 0.1,
+        }));
+        return updatedPets;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
