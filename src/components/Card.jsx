@@ -1,7 +1,21 @@
-// import { petsData } from "../lib";
+import { useState } from "react";
+import { petsData } from "../lib";
 
-export default function Card(props) {
-  const pet = props.pet;
+// import { petsData } from "../lib";
+export default function Card({ pet }) {
+  //use state to change pet hunger
+  const [petHunger, setPetHunger] = useState(petsData);
+  // Feed me btn
+  const handleOnClick = (petId) => {
+    console.log("clicked pet:" + pet.id);
+
+    const updatedHunger = petHunger.map((pet) =>
+      pet.id === petId ? { ...pet, hunger: 0 } : pet
+    );
+    setPetHunger(updatedHunger);
+  };
+
+  const petHungerLevel = petHunger.find((p) => p.id === pet.id)?.hunger || 0;
 
   return (
     <div id="pet-card" className="card-style">
@@ -10,7 +24,8 @@ export default function Card(props) {
       <p className="hunger-meter">Hunger:</p>
       <meter
         className="hunger-indicator"
-        value={pet.hunger}
+        // value={pet.hunger}
+        value={petHungerLevel}
         max="100"
         min="0"
       ></meter>
@@ -21,7 +36,15 @@ export default function Card(props) {
         max="100"
         min="0"
       ></meter>
-      <button id="feed-pet-btn">Feed Me 🍞</button>
+      <button
+        onClick={() => {
+          handleOnClick(pet.id);
+        }}
+        id="feed-pet-btn"
+        key={pet.id}
+      >
+        Feed Me 🍞
+      </button>
     </div>
   );
 }

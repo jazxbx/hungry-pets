@@ -1,1 +1,8 @@
-// Whenever this feed btn is pressed, it clears pets hunger
+// const FeedPetBtn = ({ id, feedPet }) => {
+//   const handleFeedClick = () => {
+//     feedPet(id);
+//   };
+//   return <button onClick={handleFeedClick}>Feed Me 🍞</button>;
+// };
+
+// export default FeedPetBtn;
